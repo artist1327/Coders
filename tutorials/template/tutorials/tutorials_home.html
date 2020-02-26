@@ -1,0 +1,37 @@
+{% extends "tutorials/base.html" %}
+{%block title%}Coder{% endblock %}
+{%block body%}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2><strong>Available Topics<strong></strong></h2>
+            </div>
+            {% if topics %}
+                {% for topic in topics %}
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <a href = "{% url 'details' topic.id %}">
+                                <img src="https://media.giphy.com/media/rK2gGlxjLMvMk/giphy.gif" alt="{{topic.name}}" title="{{topic.name}}" class="img-responsive">
+                            </a>
+                            <div class="caption">
+                                <h2 style="colour:Green"><strong>{{topic.unique_no}}-{{topic.name}}</strong></h2>
+                                <a href = "{% url 'details' topic.pk %}" class="btn btn-primary btn-sm" role="button">View Editorial</a>
+                                <a href = "{% url 'mock' topic.id %}" class=" btn btn-success btn-xs" role="button">
+                                    <h6>Mocktest</h6>
+                                </a>
+                                <button type="button" class="btn btn-info btn-xs" role="button">
+                                    <ul>
+                                        <li>Top Rated: {{topic.top_rated}}</li>
+                                    </ul>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+        </div>
+    </div>
+
+{% endblock %}

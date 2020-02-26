@@ -1,0 +1,36 @@
+{% extends "tutorials/base.html" %}
+{%block title%}{{topic.name}}{% endblock %}
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'tutorials/style_detail.css' %}" />
+
+{%block body%}
+    <h1>{{topic.unique_no}}-{{topic.name}}</h1>
+
+    {% if error_message %}
+        <p><strong>{{error_message}}</strong></p>
+    {% endif %}
+
+    <form action="{% url 'favourite' topic.id %}" method="post">
+        {% csrf_token %}
+
+        {% for mocktest in topic.mocktest_set.all %}
+            <input type="radio" id="mocktest{{forloop.counter}}" name="mocktest" value="{{mocktest.id}}" />
+            <label for="mocktest{{forloop.counter}}">
+                <a href="mock_test">{{mocktest.domain.name}}</a><br>
+                {% if mocktest.is_fav %}
+                    <img src="https://i.imgur.com/b9b13Rd.png" />
+                {% endif %}
+            </label><br>
+        {% endfor %}
+        <input type="submit" value="Favourite">
+    </form>
+
+{% endblock %}
+
+
+
+
+
+
+
+
